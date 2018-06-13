@@ -1,5 +1,6 @@
 package com.example.michael.lib;
 
+import java.util.Date;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -73,6 +74,12 @@ class NewClass
 		return false;
 	}
 
+	/**
+	 * this constructs primes up to a new maximum number
+	 * it works by checking the numbers with modulo against all other prime numbers
+	 *
+	 * @param newMax the new maximum number
+	 */
 	private void constructPrimes(int newMax)
 	{
 
@@ -82,24 +89,34 @@ class NewClass
 		if (newMax < max || primes.contains(newMax))
 			return;
 
-		if(newMax > 500000)
-			System.out.println(">.> this may take a while");
+		long first = new Date().getTime();
 
-		while(max <= newMax)
+		while (max <= newMax)
 		{
+			//this skips even numbers, that is if we start on an odd number
 			max += 2;
+
+			//this cuts off much time
+			int sqrt = (int) Math.sqrt(max);
+
 			boolean isPrime = true;
-			for(int prime:primes)
+			for (int prime : primes)
 			{
-				if(max % prime == 0)
+				if (max % prime == 0)
 				{
 					isPrime = false;
 				}
-				if(!isPrime)
+				if (!isPrime || prime > sqrt)
 					break;
 			}
 			if (isPrime)
 				primes.add(max);
 		}
+
+		long last = new Date().getTime();
+
+		float time = (last - first);
+		time /= 1000;
+		System.out.println(time + " seconds");
 	}
 }
