@@ -14,8 +14,11 @@ class NewClass
 {
 	//notice, I used Integer, not int
 	//in java, all things are objects, except primitive data types
-	//Set takes in objects, so I gave it the Integer object
+	//Set takes in objects, so I gave it the Integer object... because java
 	private Set<Integer> primes;
+
+	//this is the max number that we've checked so far
+	//that way we don't have redundant checkings
 	private int max;
 
 	//this is a singleton, meaning that there will only be one of this object in
