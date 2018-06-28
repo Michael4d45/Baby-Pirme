@@ -11,7 +11,7 @@ import java.util.TreeSet;
  * to get this commenting scheme, type /** before a class, method or data member
  * then hit enter
  */
-class Prime {
+public class Prime {
     //notice, I used Integer, not int
     //in java, all things are objects, except primitive data types
     //Set takes in objects, so I gave it the Integer object... because java
@@ -26,10 +26,6 @@ class Prime {
     static private Prime sPrime;
 
     //to create getters/setters press alt + insert and make selection
-
-    public static Prime getsPrime() {
-        return sPrime;
-    }
 
     //however, I want a singleton getter to get the object
     public static Prime get() {
@@ -108,5 +104,47 @@ class Prime {
         float time = (last - first);
         time /= 1000;
         System.out.println(time + " seconds");
+    }
+
+
+    /**
+     * change this so we can keep asking it if other numbers are prime
+     * and exits when "exit" is typed
+     *
+     * @param guess
+     * @return response to the argument as to whether the argument is prime or not
+     */
+	public String isArgPrime(String guess) {
+        //we use StringBuilder because they say it's better... or something... efficient-er
+        //don't worry, it's easy to use
+        StringBuilder s = new StringBuilder();
+
+        //with strings, we can use regular expressions (regex) to see if it isn't a number
+        //just so we can force the use of numbers from user.
+        if (!guess.matches("[0-9]*")) {
+            s.append(guess);
+            s.append(" is not a number");
+            return s.toString();
+        }
+
+        //in Java, (and you can in c++) instantiate your variables where
+        //you use/need them// where it makes sense
+		int potentialPrime = 0;
+		try
+		{
+			potentialPrime = Integer.parseInt(guess);
+		}catch (NumberFormatException e)
+		{
+			s.append("bad input, try again");
+			return s.toString();
+		}
+
+        s.append(potentialPrime);
+        s.append(" is ");
+        if (!isPrime(potentialPrime))//this is where the magic happens
+            s.append("not ");
+        s.append("prime");
+
+        return s.toString();
     }
 }

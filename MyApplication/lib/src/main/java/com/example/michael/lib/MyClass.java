@@ -24,12 +24,14 @@ public class MyClass {
     private void dialog() {
         String input = "";
 
+        Prime prime = Prime.get();
         while (!input.equals("end")) {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             try {
                 System.out.println("give me a number, please");
                 input = br.readLine();
-                System.out.println(isArgPrime(input));
+                System.out.println("is " + input + " prime?");
+				System.out.println(prime.isArgPrime(input));
             } catch (IOException e) {
                 e.printStackTrace();
                 break;
@@ -37,42 +39,5 @@ public class MyClass {
         }
     }
 
-    /**
-     * change this so we can keep asking it if other numbers are prime
-     * and exits when "exit" is typed
-     *
-     * @param guess
-     * @return response to the argument as to whether the argument is prime or not
-     */
-    private static String isArgPrime(String guess) {
-        //we use StringBuilder because they say it's better... or something... efficient-er
-        //don't worry, it's easy to use
-        StringBuilder s = new StringBuilder();
-        s.append("is ");
-        s.append(guess);
-        s.append(" prime?\n");
-
-        //with strings, we can use regular expressions (regex) to see if it isn't a number
-        //just so we can force the use of numbers from user.
-        if (!guess.matches("[0-9]*")) {
-            s.append(guess);
-            s.append(" is not a number\n");
-            return s.toString();
-        }
-
-        //in Java, (and you can in c++) instantiate your variables where
-        //you use/need them// where it makes sense
-        int potentialPrime = Integer.parseInt(guess);
-
-        Prime prime = Prime.get();
-
-        s.append(potentialPrime);
-        s.append(" is ");
-        if (!prime.isPrime(potentialPrime))//this is where the magic happens
-            s.append("not ");
-        s.append("prime");
-
-        return s.toString();
-    }
 
 }
